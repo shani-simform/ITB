@@ -1,0 +1,28 @@
+# Framework
+selenium~=4.25.0
+
+# Pytest
+pytest~=8.3.3
+
+# Parallel Test
+pytest-xdist
+
+# Report
+pytest-html
+
+# Data Driven Test
+openpyxl
+
+# Driver Manager
+webdriver-manager
+
+# Allure report
+allure-pytest
+
+allure-python-commons
+
+gspread
+
+msal
+
+requests
