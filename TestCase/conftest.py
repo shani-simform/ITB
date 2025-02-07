@@ -12,12 +12,12 @@ def pytest_addoption(parser):
     parser.addoption("--node_url", action="store", default=None, help="Node URL for Selenium Grid")
 
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(scope="function", autouse=True)
 def browser(request):
     return request.config.getoption("--browser")
 
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(scope="function", autouse=True)
 def setup(browser, request ):
     global driver
     browser_name = request.config.getoption("--browser").lower()

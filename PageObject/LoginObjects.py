@@ -21,7 +21,7 @@ class LoginPage:
 
     def __init__(self, driver):
         self.driver = driver
-        self.WebDriverWait = WebDriverWait(self.driver, 10)
+        self.WebDriverWait = WebDriverWait(self.driver, 25)
 
     def get_text(self, locator):
         self.WebDriverWait.until(EC.presence_of_element_located((By.CSS_SELECTOR, locator)))
@@ -54,8 +54,12 @@ class LoginPage:
     def set_password(self, password):
         self.set_input(self.password_input_css, password)
 
-    def click_login(self):
+    # Used to click on the login and submit the form.
+    def click_submit(self):
         self.click_button('css', self.submit_btn_css)
+
+    def click_logout(self):
+        self.click_button('xpath', self.logout_btn_xpath)
 
     def click_forgot_password(self):
         self.click_button('css', self.forgotPassword_btn_css)
@@ -77,3 +81,4 @@ class LoginPage:
 
     def get_home_text(self):
         return self.get_text(self.home_txt_css)
+

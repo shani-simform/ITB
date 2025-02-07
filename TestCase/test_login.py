@@ -1,11 +1,11 @@
-import time
 import pytest
-from PageObjects.LoginObjects import LoginPage
+from PageObject.LoginObjects import LoginPage
 
-class Test_login():
 
-    username = "shanipatel@yopmail.com"
-    password = "Shani@123"
+class Test_login:
+
+    username = "shani@simformsolutions.com"
+    password =  "Shani@123" #"@PlE8tXcK4oX"
     baseurl = "https://dev.insightstobehavior.net"
     userOtp = "999999"
 
@@ -15,10 +15,11 @@ class Test_login():
         self.lp = LoginPage(self.driver)
         self.lp.set_username(self.username)
         self.lp.set_password(self.password)
-        self.lp.click_login()
+        self.lp.click_submit()
         self.lp.set_otp(self.userOtp)
-        self.lp.click_login()
+        self.lp.click_submit()
         assert self.lp.get_home_text().lower() == "home".lower()
+        # self.lp.click_logout()
 
     @pytest.mark.dependency(depends=["test_001_login"], skip=True)
     def test_002_rememberme(self, setup):
@@ -28,6 +29,8 @@ class Test_login():
         self.lp.set_username(self.username)
         self.lp.set_password(self.password)
         self.lp.toggle_checkbox()
-        self.lp.click_login()
+        self.lp.click_submit()
         self.lp.set_otp(self.userOtp)
-        self.lp.click_login()
+        self.lp.click_submit()
+        assert self.lp.get_home_text().lower() == "home".lower()
+
