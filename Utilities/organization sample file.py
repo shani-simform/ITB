@@ -11,11 +11,40 @@ roles = [
 
 # Sample data
 titles = ["Principal", "Vice Principal", "Teacher", "Administrator"]
-last_names = ["John", "Jane", "Robert", "Emily", "Michael", "Sarah", "David", "Laura"]
-first_names = ["Smith", "Johnson", "Brown", "Williams", "Jones", "Davis", "Miller", "Wilson"]
+
+# first_names = [
+#     "Evan", "Julian", "Christian", "Oliver", "Jason", "Isaac", "Sam", "Keith",
+#     "Leonard", "Isaac", "David", "Brian", "Jake", "Alexander", "Adrian", "Matt",
+#     "Joshua", "Edward", "Piers", "Tim"
+# ]
+#
+# last_names = [
+#     "Nash", "Mackenzie", "Hemmings", "Baker", "Rampling", "Berry", "Peake",
+#     "Manning", "Sutherland", "Murray", "Duncan", "Terry", "Morgan", "Mackay",
+#     "Stewart", "Turner", "Vaughan", "McGrath", "Gill", "Cameron"
+# ]
+
+first_names = [
+    "Jack", "Joe", "Austin", "Evan", "Sam", "Steven", "Nicholas", "Warren",
+    "Dominic", "Leonard", "Gordon", "Phil", "Thomas", "Keith", "Brian", "Gordon",
+    "Sean", "Edward", "Charles", "Brandon", "Jacob", "Charles", "Colin", "Max",
+    "Simon", "Blake", "Anthony", "Connor", "Nicholas", "Stephen", "Frank", "Eric",
+    "Piers", "Richard", "Brian", "Gordon", "Alan", "Christian", "Andrew", "Harry",
+    "Eric", "Jacob", "Carl", "Colin", "David", "Carl", "Piers", "Keith", "Victor", "Colin"
+]
+
+last_names = [
+    "Blake", "Thomson", "Glover", "Glover", "Wallace", "Bower", "Lee", "Harris",
+    "Campbell", "Fisher", "James", "Lambert", "Rees", "Davidson", "McLean", "Walsh",
+    "Gray", "Fraser", "Baker", "Skinner", "Cameron", "Short", "Butler", "King",
+    "Alsop", "Reid", "Parsons", "Short", "Mitchell", "Welch", "Hart", "Walker",
+    "Simpson", "Ball", "Black", "Welch", "Russell", "Hill", "Jackson", "Abraham",
+    "Rutherford", "Chapman", "Langdon", "Gibson", "Russell", "Alsop", "Ogden", "Hughes",
+    "Ferguson", "Dickens"
+]
 
 def generate_organizations(num_records):
-    return [[f"School {i}", f"{i} Main St", "Cleveland", 1000+i, "NY", f"Contact {i}", "Director", "123-456-7890", f"contact{i}@example.com"] for i in range(1, num_records+1)]
+    return [[f"School {i}", f"{i} Main St", "Cleveland", 1000+i, "New York", f"Contact {i}", "Director", "123-456-7890", f"contact{i}@example.com"] for i in range(1, num_records+1)]
 
 # def generate_organizations(num_records):
 #     return [[f"School {i}", f"{i} Main St", "Cleveland", 1000+i, "NY", f"Contact {i}", "Director", "123-456-7890", f"contact{i}@example.com"] for i in range(1, num_records+1)]
@@ -30,7 +59,7 @@ def generate_users(num_records, orgs):
     while len(users) < num_records:
         first_name = random.choice(first_names)
         last_name = random.choice(last_names)
-        email = f"{first_name.lower()}.{last_name.lower()}{len(used_emails)}@example.com"
+        email = f"{first_name.lower()}.{last_name.lower()}{len(used_emails)+100}@example.com"
         if email not in used_emails:
             used_emails.add(email)
             org = random.choice(orgs)[0]
@@ -40,8 +69,8 @@ def generate_users(num_records, orgs):
     return users
 
 # User input for record counts
-num_records_org = 500 # Adjust this number as needed
-num_records_users = 500  # Adjust this number as needed
+num_records_org = 10 # Adjust this number as needed
+num_records_users = 100  # Adjust this number as needed
 num_records_parent_org = 1 # Adjust this number as needed
 
 
@@ -58,7 +87,7 @@ df3 = pd.DataFrame(sheet3_data, columns=["Titles"])
 df4 = pd.DataFrame(sheet4_data, columns=["First Name", "Last Name", "Email", "Org", "Title", "Roles"])
 
 # Save to Excel
-with pd.ExcelWriter("organization_setup1.xlsx", engine="openpyxl") as writer:
+with pd.ExcelWriter("organization_setup_50k.xlsx", engine="openpyxl") as writer:
     df1.to_excel(writer, sheet_name="Parent Org Setup", index=False)
     df2.to_excel(writer, sheet_name="Child Org Setup", index=False)
     df3.to_excel(writer, sheet_name="Titles", index=False)
