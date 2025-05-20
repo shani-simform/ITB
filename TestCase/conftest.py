@@ -50,16 +50,15 @@ def setup(browser, request ):
     if browser_name == "chrome":
         # options = webdriver.ChromeOptions()
         driver = webdriver.Chrome(options=options)
-    # elif browser_name == "firefox":
-    #     options = webdriver.FirefoxOptions()
-    #     driver = webdriver.Firefox(options)
-    # elif browser_name == "edge":
-    #     options = webdriver.EdgeOptions()
-    #     driver = webdriver.Edge(options)
-    # else:
-    #     options = webdriver.ChromeOptions()
-    #     # driver = webdriver.Chrome(options)
-    #     driver = webdriver.Chrome(options=chrome_options)
+    elif browser_name == "firefox":
+        options = webdriver.FirefoxOptions()
+        driver = webdriver.Firefox(options)
+    elif browser_name == "edge":
+        options = webdriver.EdgeOptions()
+        driver = webdriver.Edge(options)
+    else:
+        options = webdriver.ChromeOptions()
+        driver = webdriver.Chrome(options=options)
     driver.maximize_window()
     driver.implicitly_wait(10)
     yield driver
@@ -80,12 +79,6 @@ def login(setup):
     lp.click_submit()
     lp.set_otp(userOtp)
     lp.click_submit()
-    # time.sleep(10)
-    # try:
-    #     alert = driver.switch_to.alert
-    #     alert.accept()
-    # except:
-    #     pass
     lp.select_organization()
     assert lp.get_home_text().lower() == "home".lower()
 

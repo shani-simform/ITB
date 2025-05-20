@@ -29,12 +29,13 @@ class CreateNewCase(BasePage):
     SELECT_STUDENT_BEHAVIOR_CATEGORY = (By.XPATH, "//*[@nzerrortip='Please select Behavior category.']//input")
     SELECT_STUDENT_BEHAVIOR_SUBCATEGORY = (By.XPATH, "//*[@nzerrortip='Please select Behavior sub-type.']//input")
     SELECT_STUDENT_SCHEDULE = (By.XPATH, "//*[@nzerrortip='Please select student schedule.']//input")
-    SELECT_STUDENT_LANGUAGE = (By.XPATH, "//*[@class='radio-wrapper']//span[@class='ant-radio']/input")
+    SELECT_STUDENT_LANGUAGE = (By.XPATH, "(//*[@class='radio-wrapper']//span[@class='ant-radio'])[{value}]")
     ENTER_STUDENT_NOTE = (By.XPATH, "//textarea[@id='note']")
     SELECT_TRAINING_STUDENT = (By.XPATH, "//*[@nzerrortip='Please select training student.']//nz-select-item")
     SELECT_STUDENT_SAFETYPLAN = (By.XPATH, "//*[@nzerrortip='Please select safety plan.']//nz-select-item")
     SELECT_DROPDOWN_VALUE = (By.XPATH, "//nz-option-item[contains(@title, '{value}')]")
     SUBMIT_BUTTON = (By.XPATH, "//button[@type='submit']")
+    VAL_MESSAGE     =  (By.XPATH, "//*[contains(@class, 'ant-notification-notice-message')]/div")
 
     def search_student(self, studentname):
         self.send_keys(*self.SEARCH_STUDENT, studentname)
@@ -89,8 +90,12 @@ class CreateNewCase(BasePage):
         except:
             pass
 
-    def select_student_language(self):
-        self.click(*self.SELECT_STUDENT_LANGUAGE)
+
+    def get_validation_message(self):
+        return self.get_text(*self.VAL_MESSAGE)
+
+    def select_student_language(self, value:int):
+        self.click(*self.SELECT_STUDENT_LANGUAGE[1].format(value=value))
 
     def enter_student_note(self, studentnote):
         self.send_keys(*self.ENTER_STUDENT_NOTE, studentnote)

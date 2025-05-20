@@ -19,8 +19,8 @@ class Test_DefineBehavior:
         self.cnc.select_student_behavior_category("Bus")
         self.cnc.select_student_behavior_subcategory("Aggression Towards Others")
         self.cnc.select_student_schedule("shani schedule 002")
-        self.cnc.select_student_language()
+        self.cnc.select_student_language(value=1)
+        self.cnc.enter_student_note("shani note")
         self.cnc.click_submit_button()
-
-
-        time.sleep(10)
+        message = self.cnc.get_validation_message()
+        assert "success" in message

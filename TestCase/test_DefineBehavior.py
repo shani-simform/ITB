@@ -4,8 +4,6 @@ from PageObject.Insights.insightDetails import BIPCasePage
 
 class Test_DefineBehavior:
 
-    # def __init__(self):
-    #     pass
 
     def test_addnewbehavior(self, setup, login):
         self.driver = setup
@@ -46,10 +44,5 @@ class Test_DefineBehavior:
         time.sleep(5)
         self.DFB.click_save()
         message = self.DFB.get_validation_message()
-        print(message)
-        if "success" in message:
-            assert True
-        else:
-            assert False
-        time.sleep(20)
+        assert "success" in message
 
